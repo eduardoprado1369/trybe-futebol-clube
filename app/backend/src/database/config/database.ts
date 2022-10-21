@@ -15,3 +15,4 @@ const config: Options = {
 }
 
 module.exports = config;
+// começando o projeto
