@@ -1,5 +1,6 @@
 import * as express from 'express';
 import UserController from './database/controllers/User';
+import validateToken from './database/middlewares/validateToken';
 
 class App {
   public app: express.Express;
@@ -13,6 +14,9 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
 
     this.app.post('/login', (req, res) => UserController.findUser(req, res));
+
+    this.app.get('/login/validate', validateToken, (req, res) => UserController
+      .findUserRole(req, res));
   }
 
   private config():void {

@@ -1,4 +1,4 @@
-import * as sinon from 'sinon';
+// import Sinon, * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
@@ -6,13 +6,19 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Example from '../database/models/ExampleModel';
 
+import UserController from '../database/controllers/User';
+
 import { Response } from 'superagent';
+import { any } from 'sequelize/types/lib/operators';
+import { response } from 'express';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
+const jwtRegex = /^(?:[\w-]*\.){2}[\w-]*$/;
+// regex source https://stackoverflow.com/questions/61802832/regex-to-match-jwt
 
-describe('Seu teste', () => {
+describe('Testa /login', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
@@ -35,11 +41,50 @@ describe('Seu teste', () => {
   //   chaiHttpResponse = await chai
   //      .request(app)
   //      ...
-
+ // 
   //   expect(...)
   // });
-
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  });
+  describe('teste com informações corretas', () => {
+    it('Testa o login com as informações corretas', async () => {
+      const response = await chai.request(app).post('/login').send({email: 'user@user.com',
+           password: 'secret_user'})
+           console.log(response)
+      expect(response.status).to.be.equal(200)
+      expect(response.body.token).to.match(jwtRegex)
+      });
+      // it('Testa o /login/validate', async () => {
+      //   const response = await chai.request(app).get('/login/validate')
+      //        console.log(response)
+      //   expect(response.status).to.be.equal(200)
+      //   expect(response.body.role).to.match(jwtRegex)
+      //   });
+  })
+  describe('Testa faltando informações', () => {
+    it('Testa o login faltando email', async () => {
+      const response = await chai.request(app).post('/login').send({email: 'user@user.com'})
+      expect(response.status).to.be.equal(400)
+      expect(response.body.message).to.be.equal('All fields must be filled')
+    })
+    it('Testa o login faltando senha', async () => {
+      const response = await chai.request(app).post('/login').send({password: 'secret_user'})
+      expect(response.status).to.be.equal(400)
+      expect(response.body.message).to.be.equal('All fields must be filled')
+    })
+  })
+  describe.skip('Testa com informações incorretas', () => {
+    it('Testa com email incorreto', async () => {
+      const response = await chai.request(app).post('/login').send({email: 'incorrect@email',
+         password: 'secret_user'})
+         console.log(response)
+    expect(response.status).to.be.equal(401)
+    expect(response.body.message).to.be.equal('Incorrect email or password')
+    })
+    it.skip('Testa com senha incorreta', async () => {
+      const response = await chai.request(app).post('/login').send({email: 'user@user.com',
+         password: 'incorrect_password'})
+         console.log(response)
+    expect(response.status).to.be.equal(401)
+    expect(response.body.message).to.be.equal('Incorrect email or password')
+    })
+  })
 });

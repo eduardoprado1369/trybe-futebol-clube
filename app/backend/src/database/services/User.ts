@@ -7,10 +7,19 @@ import ILogin from '../interfaces/Login';
 export default class UserService {
   static async findUser(user: ILogin) {
     const { email, password } = user;
-    const login = await Users.findOne({ where: { email, password } });
-    // console.log(compareSync(password, login.dataValues));
+    const login = await Users.findOne({ where: { email } });
+    const isPasswordCorrect = compareSync(password, login?.getDataValue('password'));
     const token = generateToken(user);
-    if (login) return token;
+    if (isPasswordCorrect) return token;
+    return { message: 'Incorrect email or password' };
+  }
+
+  static async findUserRole(user: ILogin) {
+    const { email, password } = user;
+    const login = await Users.findOne({ where: { email } });
+    const isPasswordCorrect = compareSync(password, login?.getDataValue('password'));
+    const role = login?.getDataValue('role');
+    if (isPasswordCorrect) return role;
     return { message: 'Incorrect email or password' };
   }
 }
