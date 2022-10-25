@@ -1,4 +1,5 @@
 import * as express from 'express';
+import UserController from './database/controllers/User';
 
 class App {
   public app: express.Express;
@@ -10,6 +11,8 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+
+    this.app.post('/login', (req, res) => UserController.findUser(req, res));
   }
 
   private config():void {
@@ -32,4 +35,5 @@ class App {
 export { App };
 
 // A execução dos testes de cobertura depende dessa exportação
+
 export const { app } = new App();
