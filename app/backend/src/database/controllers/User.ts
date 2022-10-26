@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import UserService from '../services/User';
-// import { Error } from 'sequelize';
 
 // const fieldsMissingMessage = 'All fields must be filled';
-
 export default class UserController {
   static async findUser(req: Request, res: Response) {
     try {
@@ -22,13 +20,13 @@ export default class UserController {
     }
   }
 
-  static async findUserRole(req: Request, res: Response) {
-    const login = req.body;
-    const role = await UserService.findUserRole(login);
-    if (typeof role === 'object') {
-      return res.status(401)
-        .json({ message: 'Incorrect email or password' });
-    }
-    return res.status(200).json({ role });
-  }
+  // static async findUserRole(req: Request, res: Response) {
+  //   const login = req.body;
+  //   const role = await UserService.findUserRole(login);
+  //   if (typeof role === 'object') {
+  //     return res.status(401)
+  //       .json({ message: 'Incorrect email or password' });
+  //   }
+  //   return res.status(200).json({ role });
+  // }
 }

@@ -42,7 +42,7 @@ Matches.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'Users',
+  modelName: 'Matches',
   timestamps: false,
 });
 

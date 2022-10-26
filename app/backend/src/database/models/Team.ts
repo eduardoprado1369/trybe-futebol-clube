@@ -21,7 +21,7 @@ Teams.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'Users',
+  modelName: 'Teams',
   timestamps: false,
 });
 

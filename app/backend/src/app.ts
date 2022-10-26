@@ -1,5 +1,6 @@
 import * as express from 'express';
 import UserController from './database/controllers/User';
+import TeamController from './database/controllers/Team';
 import validateToken from './database/middlewares/validateToken';
 import validateEmail from './database/middlewares/validateEmail';
 import validatePassword from './database/middlewares/validatePassword';
@@ -27,8 +28,12 @@ class App {
       validateToken,
       // validateEmail,
       // validatePassword,
-      (req, res) => UserController.findUserRole(req, res),
+      // (req, res) => UserController.findUserRole(req, res),
     );
+
+    this.app.get('/teams', (req, res) => TeamController.findAllTeams(req, res));
+
+    this.app.get('/teams/:id', (req, res) => TeamController.findTeam(req, res));
   }
 
   private config():void {

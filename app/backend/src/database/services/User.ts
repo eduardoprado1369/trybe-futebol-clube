@@ -23,12 +23,12 @@ export default class UserService {
     return { message: errorMessage };
   }
 
-  static async findUserRole(user: ILogin) {
-    const { email, password } = user;
-    const login = await Users.findOne({ where: { email } });
-    const isPasswordCorrect = compareSync(password, login?.getDataValue('password'));
-    const role = login?.getDataValue('role');
-    if (isPasswordCorrect) return role;
-    return { message: 'Incorrect email or password' };
-  }
+  // static async findUserRole(user: ILogin) {
+  //   const { email, password } = user;
+  //   const login = await Users.findOne({ where: { email } });
+  //   const isPasswordCorrect = compareSync(password, login?.getDataValue('password'));
+  //   const role = login?.getDataValue('role');
+  //   if (isPasswordCorrect) return role;
+  //   return { message: 'Incorrect email or password' };
+  // }
 }
