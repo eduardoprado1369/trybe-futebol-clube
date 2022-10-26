@@ -1,17 +1,18 @@
 import { verify } from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
+import Decoded from '../interfaces/Decoded';
 
 const secret = process.env.JWT_SECRET || 'jwt_secret';
 
-export default (req: Request, res: Response, next: NextFunction) => {
+export default (req: Request, res: Response) => {
   try {
     const token = req.header('Authorization');
     if (!token) {
       return res.status(401).json({ message: 'Token not found' });
     }
-    const decoded = verify(token, secret);
-    req.body.userRole = decoded;
-    next();
+    const decoded = verify(token, secret) as Decoded;
+    console.log(decoded);
+    res.status(200).json({ role: decoded.role });
   } catch (e) {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }

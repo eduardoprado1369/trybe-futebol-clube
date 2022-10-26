@@ -25,8 +25,8 @@ class App {
     this.app.get(
       '/login/validate',
       validateToken,
-      validateEmail,
-      validatePassword,
+      // validateEmail,
+      // validatePassword,
       (req, res) => UserController.findUserRole(req, res),
     );
   }
