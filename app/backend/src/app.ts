@@ -1,6 +1,8 @@
 import * as express from 'express';
 import UserController from './database/controllers/User';
 import validateToken from './database/middlewares/validateToken';
+import validateEmail from './database/middlewares/validateEmail';
+import validatePassword from './database/middlewares/validatePassword';
 
 class App {
   public app: express.Express;
@@ -15,8 +17,13 @@ class App {
 
     this.app.post('/login', (req, res) => UserController.findUser(req, res));
 
-    this.app.get('/login/validate', validateToken, (req, res) => UserController
-      .findUserRole(req, res));
+    this.app.get(
+      '/login/validate',
+      validateToken,
+      validateEmail,
+      validatePassword,
+      (req, res) => UserController.findUserRole(req, res),
+    );
   }
 
   private config():void {
