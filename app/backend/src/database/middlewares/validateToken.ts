@@ -10,7 +10,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
       return res.status(401).json({ message: 'Token not found' });
     }
     const decoded = verify(token, secret);
-    console.log(decoded);
     req.body.userRole = decoded;
     next();
   } catch (e) {
