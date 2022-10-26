@@ -72,7 +72,7 @@ describe('Testa /login', () => {
       expect(response.body.message).to.be.equal('All fields must be filled')
     })
   })
-  describe.skip('Testa com informações incorretas', () => {
+  describe('Testa com informações incorretas', () => {
     it('Testa com email incorreto', async () => {
       const response = await chai.request(app).post('/login').send({email: 'incorrect@email',
          password: 'secret_user'})
@@ -80,7 +80,7 @@ describe('Testa /login', () => {
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
-    it.skip('Testa com senha incorreta', async () => {
+    it('Testa com senha incorreta', async () => {
       const response = await chai.request(app).post('/login').send({email: 'user@user.com',
          password: 'incorrect_password'})
          // console.log(response)
@@ -88,4 +88,5 @@ describe('Testa /login', () => {
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
   })
+  it('Testa com ')
 });
