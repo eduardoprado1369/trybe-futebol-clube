@@ -48,16 +48,17 @@ describe('Testa /login', () => {
     it('Testa o login com as informações corretas', async () => {
       const response = await chai.request(app).post('/login').send({email: 'user@user.com',
            password: 'secret_user'})
-           console.log(response)
       expect(response.status).to.be.equal(200)
       expect(response.body.token).to.match(jwtRegex)
       });
-      // it('Testa o /login/validate', async () => {
-      //   const response = await chai.request(app).get('/login/validate')
-      //        console.log(response)
-      //   expect(response.status).to.be.equal(200)
-      //   expect(response.body.role).to.match(jwtRegex)
-      //   });
+      it('Testa o /login/validate', async () => {
+        await chai.request(app).post('/login').send({email: 'user@user.com',
+           password: 'secret_user'})
+        const response = await chai.request(app).get('/login/validate')
+             console.log(response.body.role)
+        expect(response.status).to.be.equal(200)
+        expect(response.body.role).to.be.equal('user')
+        });
   })
   describe('Testa faltando informações', () => {
     it('Testa o login faltando email', async () => {
@@ -75,14 +76,14 @@ describe('Testa /login', () => {
     it('Testa com email incorreto', async () => {
       const response = await chai.request(app).post('/login').send({email: 'incorrect@email',
          password: 'secret_user'})
-         console.log(response)
+         // console.log(response)
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
     it.skip('Testa com senha incorreta', async () => {
       const response = await chai.request(app).post('/login').send({email: 'user@user.com',
          password: 'incorrect_password'})
-         console.log(response)
+         // console.log(response)
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
