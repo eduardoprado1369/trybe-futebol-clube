@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import INewMatch from '../interfaces/NewMatch';
 import MatchService from '../services/Match';
+import TeamService from '../services/Team';
 
 export default class MatchController {
   static async findAllMatches(req: Request, res: Response) {
@@ -23,6 +24,12 @@ export default class MatchController {
 
   static async createMatch(req: Request, res: Response) {
     const match: INewMatch = req.body;
+    const team1 = await TeamService.findTeam(Number(req.body.homeTeam));
+    const team2 = await TeamService.findTeam(Number(req.body.awayTeam));
+    if (!team1 || !team2) {
+      return res.status(404)
+        .json({ message: 'There is no team with such id!' });
+    }
     if (match.awayTeam === match.homeTeam) {
       return res.status(422)
         .json({ message: 'It is not possible to create a match with two equal teams' });

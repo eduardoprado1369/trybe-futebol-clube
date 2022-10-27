@@ -40,6 +40,7 @@ export default class MatchService {
 
   static async finishMatch(id: number) {
     const match = await Matches.update({ inProgress: false }, { where: { id } });
+    console.log(match);
     return match;
   }
 }
