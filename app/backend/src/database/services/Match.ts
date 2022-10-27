@@ -23,7 +23,7 @@ export default class MatchService {
     const matches = await Matches.findAll({ where: { inProgress: false },
       include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
         { model: Teams, as: 'teamAway', attributes: ['teamName'] }] });
-    return { ...matches, inProgress: false };
+    return matches;
   }
 
   static async createMatch(match: INewMatch) {
