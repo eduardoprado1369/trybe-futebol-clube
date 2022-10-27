@@ -1,4 +1,5 @@
 import INewMatch from '../interfaces/NewMatch';
+import IUpdateMatch from '../interfaces/UpdateMatch';
 import Matches from '../models/Match';
 import Teams from '../models/Team';
 
@@ -40,6 +41,13 @@ export default class MatchService {
 
   static async finishMatch(id: number) {
     const match = await Matches.update({ inProgress: false }, { where: { id } });
+    console.log(match);
+    return match;
+  }
+
+  static async updateMatch(id:number, goals: IUpdateMatch) {
+    const { homeTeamGoals, awayTeamGoals } = goals;
+    const match = await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
     console.log(match);
     return match;
   }

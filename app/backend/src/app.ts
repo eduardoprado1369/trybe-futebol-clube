@@ -26,6 +26,7 @@ class App {
     this.app.post('/matches', vToken, (req, res) => MatchController.createMatch(req, res));
     this.app.patch('/matches/:id/finish', vToken, (req, res) => MatchController
       .finishMatch(req, res));
+    this.app.patch('/matches/:id', (req, res) => MatchController.updateMatch(req, res));
   }
 
   private config():void {

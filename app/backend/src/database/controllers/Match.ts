@@ -50,4 +50,11 @@ export default class MatchController {
     if (finishedMatch) return res.status(200).json({ message: 'Finished' });
     return res.status(404).json({ message: 'There is no team with such id!' });
   }
+
+  static async updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const goals = req.body;
+    const match = await MatchService.updateMatch(Number(id), goals);
+    return res.status(200).json(match);
+  }
 }
