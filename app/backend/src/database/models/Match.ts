@@ -46,11 +46,11 @@ Matches.init({
   timestamps: false,
 });
 
-Matches.hasMany(Teams, { foreignKey: 'id', as: 'home_team' });
-Matches.hasMany(Teams, { foreignKey: 'id', as: 'away_team' });
+Matches.belongsTo(Teams, { foreignKey: 'homeTeam', as: 'teamHome' });
+Matches.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'teamAway' });
 
-Teams.belongsTo(Matches, { foreignKey: 'home_team', as: 'home_team' });
-Teams.belongsTo(Matches, { foreignKey: 'away_team', as: 'away_team' });
+Teams.hasMany(Matches, { foreignKey: 'homeTeam', as: 'homeTeamMatches' });
+Teams.hasMany(Matches, { foreignKey: 'awayTeam', as: 'awayTeamMatches' });
 
 /**
   * `Workaround` para aplicar as associations em TS:

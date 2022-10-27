@@ -96,8 +96,8 @@ describe('Testa /login', () => {
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
+    it('Testa o login/validate')
   })
-  // it('Testa com ')
 });
 // describe('Testa /teams', () => {
 //   it('Testa o findAll', async () => {

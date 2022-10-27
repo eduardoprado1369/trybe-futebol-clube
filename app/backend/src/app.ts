@@ -1,6 +1,7 @@
 import * as express from 'express';
 import UserController from './database/controllers/User';
 import TeamController from './database/controllers/Team';
+import MatchController from './database/controllers/Match';
 import validateToken from './database/middlewares/validateToken';
 import validateEmail from './database/middlewares/validateEmail';
 import validatePassword from './database/middlewares/validatePassword';
@@ -34,6 +35,8 @@ class App {
     this.app.get('/teams', (req, res) => TeamController.findAllTeams(req, res));
 
     this.app.get('/teams/:id', (req, res) => TeamController.findTeam(req, res));
+
+    this.app.get('/matches', (req, res) => MatchController.findAllMatches(req, res));
   }
 
   private config():void {
