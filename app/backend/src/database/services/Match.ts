@@ -3,12 +3,20 @@ import Teams from '../models/Team';
 
 export default class MatchService {
   static async findAllMatches() {
-    const teams = await Matches.findAll({
+    const matches = await Matches.findAll({
       include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
         { model: Teams, as: 'teamAway', attributes: ['teamName'] }],
     });
-    return teams;
+    return matches;
+  }
+
+  static async findInProgressMatches() {
+    const matches = await Matches.findAll({ where: { inProgress: true } });
+    return matches;
+  }
+
+  static async findFinishedMatches() {
+    const matches = await Matches.findAll({ where: { inProgress: false } });
+    return matches;
   }
 }
-// include: [{ model: Teams, as: 'homeTeam' },
-// { model: Teams, as: 'awayTeam' }],

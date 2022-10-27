@@ -96,7 +96,13 @@ describe('Testa /login', () => {
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
-    it('Testa o login/validate')
+    it('Testa o login/validate com login errado', async() => {
+        await chai.request(app).post('/login').send({email: 'not_email',
+         password: 'incorrect_password'})
+         const response = await chai.request(app).get('/login/validate')
+         expect(response.status).to.be.equal(401)
+         expect(response.body.message).to.be.equal('Token not found')
+    })
   })
 });
 // describe('Testa /teams', () => {
