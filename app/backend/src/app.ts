@@ -17,26 +17,21 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
 
-    this.app.post(
-      '/login',
-      validateEmail,
-      validatePassword,
-      (req, res) => UserController.findUser(req, res),
-    );
+    this.app.post('/login', validateEmail, validatePassword, (req, res) => UserController
+      .findUser(req, res));
 
-    this.app.get(
-      '/login/validate',
-      validateToken,
-      // validateEmail,
-      // validatePassword,
-      // (req, res) => UserController.findUserRole(req, res),
-    );
+    this.app.get('/login/validate', validateToken);
 
     this.app.get('/teams', (req, res) => TeamController.findAllTeams(req, res));
 
     this.app.get('/teams/:id', (req, res) => TeamController.findTeam(req, res));
 
     this.app.get('/matches', (req, res) => MatchController.findAllMatches(req, res));
+
+    this.app.post('/matches', validateToken, (req, res) => MatchController.createMatch(req, res));
+
+    this.app.patch('/matches/:id/finish', validateToken, (req, res) => MatchController
+      .finishMatch(req, res));
   }
 
   private config():void {
