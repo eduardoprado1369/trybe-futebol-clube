@@ -28,7 +28,7 @@ export default class MatchService {
 
   static async createMatch(match: INewMatch) {
     const newMatch = await Matches.create({ ...match, inProgress: true });
-    console.log(newMatch);
+    // console.log(newMatch);
     return newMatch;
   }
 
