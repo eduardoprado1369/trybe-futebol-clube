@@ -38,12 +38,6 @@ export default class MatchController {
     res.status(201).json(newMatch);
   }
 
-  // static async createNewFinishedMatch(req: Request, res: Response) {
-  //   const match = req.body;
-  //   const newMatch = await MatchService.createFinishedMatch(match);
-  //   res.status(201).json(newMatch);
-  // }
-
   static async finishMatch(req: Request, res: Response) {
     const { id } = req.params;
     const finishedMatch = await MatchService.finishMatch(Number(id));
@@ -56,5 +50,10 @@ export default class MatchController {
     const goals = req.body;
     const match = await MatchService.updateMatch(Number(id), goals);
     return res.status(200).json(match);
+  }
+
+  static async getLeaderboards(_req: Request, res: Response) {
+    const leaderboards = await MatchService.getLeaderboards();
+    res.status(200).json(leaderboards);
   }
 }
