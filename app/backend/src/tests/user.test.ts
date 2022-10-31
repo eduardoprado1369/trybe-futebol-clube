@@ -103,7 +103,7 @@ describe('Testa /login', () => {
          expect(response.status).to.be.equal(401)
          expect(response.body.message).to.be.equal('Token not found')
     })
-    it('Testa o login/validate sem token errado', async() => {
+    it('Testa o login/validate com token errado', async() => {
       // await chai.request(app).post('/login').send({email: 'not_email',
       //  password: 'incorrect_password'})
        const response = await chai.request(app).get('/login/validate').set({ "authorization": 'not_token' })
