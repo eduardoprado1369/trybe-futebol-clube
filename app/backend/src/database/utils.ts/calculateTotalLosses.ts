@@ -11,6 +11,5 @@ export default async function calculateTotalLosses(id: number, type: string) {
     .filter((i) => i.homeTeamGoals > i.awayTeamGoals).length;
   if (type === 'home') return homeTeamLosses;
   if (type === 'away') return awayTeamLosses;
-  if (type === 'all') return homeTeamLosses + awayTeamLosses;
-  return 0;
+  return homeTeamLosses + awayTeamLosses;
 }

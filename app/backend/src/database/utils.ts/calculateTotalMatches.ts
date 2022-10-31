@@ -9,6 +9,5 @@ export default async function calculateTotalMatches(id: number, type: string) {
   const awayTeamMatches = finishedAwayTeamMatches.length;
   if (type === 'home') return homeTeamMatches;
   if (type === 'away') return awayTeamMatches;
-  if (type === 'all') return homeTeamMatches + awayTeamMatches;
-  return 0;
+  return homeTeamMatches + awayTeamMatches;
 }

@@ -11,7 +11,6 @@ export default (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Token not found' });
     }
     const decoded = verify(token, secret) as Decoded;
-    console.log(decoded);
     res.status(200).json({ role: decoded.role });
   } catch (e) {
     return res.status(401).json({ message: 'Expired or invalid token' });

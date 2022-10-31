@@ -39,6 +39,5 @@ export default async function calculatePoints(id: number, type: string) {
   const awayTeamPoints = await calculateAwayTeamPoints(finishedAwayTeamMatches);
   if (type === 'home') return homeTeamPoints;
   if (type === 'away') return awayTeamPoints;
-  if (type === 'all') return homeTeamPoints + awayTeamPoints;
-  return 0;
+  return homeTeamPoints + awayTeamPoints;
 }

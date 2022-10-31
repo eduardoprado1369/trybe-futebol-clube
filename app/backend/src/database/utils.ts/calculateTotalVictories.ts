@@ -11,6 +11,5 @@ export default async function calculateTotalVictories(id: number, type: string) 
     .filter((i) => i.homeTeamGoals < i.awayTeamGoals).length;
   if (type === 'home') return homeTeamVictories;
   if (type === 'away') return awayTeamVictories;
-  if (type === 'all') return homeTeamVictories + awayTeamVictories;
-  return 0;
+  return homeTeamVictories + awayTeamVictories;
 }

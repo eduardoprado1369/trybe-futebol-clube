@@ -12,6 +12,5 @@ export default async function calculateGoalsFavor(id: number, type: string) {
   // const numberOfGoalsFavor = homeTeamGoals + awayTeamGoals;
   if (type === 'home') return homeTeamGoals;
   if (type === 'away') return awayTeamGoals;
-  if (type === 'all') return homeTeamGoals + awayTeamGoals;
-  return 0;
+  return homeTeamGoals + awayTeamGoals;
 }

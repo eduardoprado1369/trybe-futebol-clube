@@ -11,6 +11,5 @@ export default async function calculateGoalsOwn(id: number, type: string) {
     .reduce((acc, i) => acc + i.homeTeamGoals, 0);
   if (type === 'home') return homeTeamGoals;
   if (type === 'away') return awayTeamGoals;
-  if (type === 'all') return homeTeamGoals + awayTeamGoals;
-  return 0;
+  return homeTeamGoals + awayTeamGoals;
 }

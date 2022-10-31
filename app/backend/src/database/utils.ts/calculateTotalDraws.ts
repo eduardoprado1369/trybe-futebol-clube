@@ -11,6 +11,5 @@ export default async function calculateTotalDraws(id: number, type: string) {
     .filter((i) => i.homeTeamGoals === i.awayTeamGoals).length;
   if (type === 'home') return homeTeamDraws;
   if (type === 'away') return awayTeamDraws;
-  if (type === 'all') return homeTeamDraws + awayTeamDraws;
-  return 0;
+  return homeTeamDraws + awayTeamDraws;
 }

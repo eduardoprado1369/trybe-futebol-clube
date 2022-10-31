@@ -7,12 +7,9 @@ import ILogin from '../interfaces/Login';
 const errorMessage = 'Incorrect email or password';
 export default class UserService {
   static async findUser(user: ILogin) {
-    console.log(user);
     const { email, password } = user;
     const login = await Users.findOne({ where: { email } });
-    console.log(login);
     if (!login) return { message: errorMessage };
-    // login?.getDataValue('password')
     const isPasswordCorrect = compareSync(password, login.password);
     const role = login.getDataValue('role');
     const fullUser = {
