@@ -1,3 +1,4 @@
+import ILeaderboard from '../interfaces/Leaderboard';
 import IMatch from '../interfaces/Match';
 import INewMatch from '../interfaces/NewMatch';
 import IUpdateMatch from '../interfaces/UpdateMatch';
@@ -10,6 +11,7 @@ import calculatePoints from '../utils.ts/calculateTotalGoals';
 import calculateTotalLosses from '../utils.ts/calculateTotalLosses';
 import calculateTotalMatches from '../utils.ts/calculateTotalMatches';
 import calculateTotalVictories from '../utils.ts/calculateTotalVictories';
+import orderLeaderboard from '../utils.ts/orderLeaderboard';
 
 export default class MatchService {
   static async findAllMatches(): Promise<IMatch[]> {
@@ -53,21 +55,25 @@ export default class MatchService {
     return match;
   }
 
-  static async getLeaderboards() {
+  static async getLeaderboards(type: string) {
     const allTeamNames = await Teams.findAll();
-    const leaderboards = await Promise.all(allTeamNames.map(async (i) => ({
+    const leaderboard: ILeaderboard[] = await Promise.all(allTeamNames.map(async (i) => ({
       name: i.teamName,
-      totalPoints: await calculatePoints(i.id),
-      totalGames: await calculateTotalMatches(i.id),
-      totalVictories: await calculateTotalVictories(i.id),
-      totalDraws: await calculateTotalDraws(i.id),
-      totalLosses: await calculateTotalLosses(i.id),
-      goalsFavor: await calculateGoalsFavor(i.id),
-      goalsOwn: await calculateGoalsOwn(i.id),
-      goalsBalance: await calculateGoalsFavor(i.id) - await calculateGoalsOwn(i.id),
+      totalPoints: await calculatePoints(i.id, type),
+      totalGames: await calculateTotalMatches(i.id, type),
+      totalVictories: await calculateTotalVictories(i.id, type),
+      totalDraws: await calculateTotalDraws(i.id, type),
+      totalLosses: await calculateTotalLosses(i.id, type),
+      goalsFavor: await calculateGoalsFavor(i.id, type),
+      goalsOwn: await calculateGoalsOwn(i.id, type),
+      goalsBalance: await calculateGoalsFavor(i.id, type) - await calculateGoalsOwn(i.id, type),
+      efficiency: Number(((await calculatePoints(i
+        .id, type) / (await calculateTotalMatches(i.id, type) * 3)) * 100)
+        .toFixed(2)),
     })));
-    console.log(leaderboards);
-    return leaderboards;
+    // console.log(leaderboard);
+    const finalLeaderboard = orderLeaderboard(leaderboard);
+    return finalLeaderboard;
   }
 }
 //  const allTeamNames = await Teams.findAll({ attributes: ['teamName'] });

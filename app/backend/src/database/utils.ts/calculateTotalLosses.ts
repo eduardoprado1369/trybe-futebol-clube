@@ -1,6 +1,6 @@
 import Matches from '../models/Match';
 
-export default async function calculateTotalLosses(id: number) {
+export default async function calculateTotalLosses(id: number, type: string) {
   const allHomeTeamMatches = await Matches.findAll({ where: { homeTeam: id } });
   const finishedHomeTeamMatches = allHomeTeamMatches.filter((i) => i.inProgress === false);
   const homeTeamLosses = finishedHomeTeamMatches
@@ -9,6 +9,8 @@ export default async function calculateTotalLosses(id: number) {
   const finishedAwayTeamMatches = allAwayTeamMatches.filter((i) => i.inProgress === false);
   const awayTeamLosses = finishedAwayTeamMatches
     .filter((i) => i.homeTeamGoals > i.awayTeamGoals).length;
-  const numberOfLosses = homeTeamLosses + awayTeamLosses;
-  return numberOfLosses;
+  if (type === 'home') return homeTeamLosses;
+  if (type === 'away') return awayTeamLosses;
+  if (type === 'all') return homeTeamLosses + awayTeamLosses;
+  return 0;
 }

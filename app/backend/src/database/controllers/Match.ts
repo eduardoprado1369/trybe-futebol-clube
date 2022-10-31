@@ -5,7 +5,7 @@ import TeamService from '../services/Team';
 
 export default class MatchController {
   static async findAllMatches(req: Request, res: Response) {
-    // console.log(req.query);
+    // console.log(req.route);
     if (req.query.inProgress) {
       const isInProgress = req.query.inProgress;
       if (isInProgress === 'true') {
@@ -52,8 +52,18 @@ export default class MatchController {
     return res.status(200).json(match);
   }
 
-  static async getLeaderboards(_req: Request, res: Response) {
-    const leaderboards = await MatchService.getLeaderboards();
+  static async getAllLeaderboards(_req: Request, res: Response) {
+    const leaderboards = await MatchService.getLeaderboards('all');
+    res.status(200).json(leaderboards);
+  }
+
+  static async getHomeLeaderboards(_req: Request, res: Response) {
+    const leaderboards = await MatchService.getLeaderboards('home');
+    res.status(200).json(leaderboards);
+  }
+
+  static async getAwayLeaderboards(_req: Request, res: Response) {
+    const leaderboards = await MatchService.getLeaderboards('away');
     res.status(200).json(leaderboards);
   }
 }

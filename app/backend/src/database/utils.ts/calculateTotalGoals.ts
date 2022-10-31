@@ -30,13 +30,15 @@ async function calculateAwayTeamPoints(matches: Matches[]) {
   return points;
 }
 
-export default async function calculatePoints(id: number) {
+export default async function calculatePoints(id: number, type: string) {
   const allHomeTeamMatches = await Matches.findAll({ where: { homeTeam: id } });
   const finishedHomeTeamMatches = allHomeTeamMatches.filter((i) => i.inProgress === false);
   const homeTeamPoints = await calculateHomeTeamPoints(finishedHomeTeamMatches);
   const allAwayTeamMatches = await Matches.findAll({ where: { awayTeam: id } });
   const finishedAwayTeamMatches = allAwayTeamMatches.filter((i) => i.inProgress === false);
   const awayTeamPoints = await calculateAwayTeamPoints(finishedAwayTeamMatches);
-  const points = homeTeamPoints + awayTeamPoints;
-  return points;
+  if (type === 'home') return homeTeamPoints;
+  if (type === 'away') return awayTeamPoints;
+  if (type === 'all') return homeTeamPoints + awayTeamPoints;
+  return 0;
 }

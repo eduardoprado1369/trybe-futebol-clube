@@ -27,7 +27,9 @@ class App {
     this.app.patch('/matches/:id/finish', vToken, (req, res) => MatchController
       .finishMatch(req, res));
     this.app.patch('/matches/:id', (req, res) => MatchController.updateMatch(req, res));
-    this.app.get('/leaderboard/home', (req, res) => MatchController.getLeaderboards(req, res));
+    this.app.get('/leaderboard', (req, res) => MatchController.getAllLeaderboards(req, res));
+    this.app.get('/leaderboard/home', (req, res) => MatchController.getHomeLeaderboards(req, res));
+    this.app.get('/leaderboard/away', (req, res) => MatchController.getAwayLeaderboards(req, res));
   }
 
   private config():void {

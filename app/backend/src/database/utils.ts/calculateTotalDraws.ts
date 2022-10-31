@@ -1,6 +1,6 @@
 import Matches from '../models/Match';
 
-export default async function calculateTotalDraws(id: number) {
+export default async function calculateTotalDraws(id: number, type: string) {
   const allHomeTeamMatches = await Matches.findAll({ where: { homeTeam: id } });
   const finishedHomeTeamMatches = allHomeTeamMatches.filter((i) => i.inProgress === false);
   const homeTeamDraws = finishedHomeTeamMatches
@@ -9,6 +9,8 @@ export default async function calculateTotalDraws(id: number) {
   const finishedAwayTeamMatches = allAwayTeamMatches.filter((i) => i.inProgress === false);
   const awayTeamDraws = finishedAwayTeamMatches
     .filter((i) => i.homeTeamGoals === i.awayTeamGoals).length;
-  const numberOfDraws = homeTeamDraws + awayTeamDraws;
-  return numberOfDraws;
+  if (type === 'home') return homeTeamDraws;
+  if (type === 'away') return awayTeamDraws;
+  if (type === 'all') return homeTeamDraws + awayTeamDraws;
+  return 0;
 }
