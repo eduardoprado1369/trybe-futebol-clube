@@ -51,7 +51,6 @@ describe('Testa /matches', () => {
           "awayTeam": 8,
           "awayTeamGoals": 0,
         }).set({ "authorization": token.body.token })
-        console.log(response)
         expect(response.status).to.be.equal(422)
         expect(response.body.message).to.be.deep.equal('It is not possible to create a match with two equal teams')
       })
@@ -64,7 +63,6 @@ describe('Testa /matches', () => {
           "awayTeam": 8,
           "awayTeamGoals": 0,
         }).set({ "authorization": token.body.token })
-        console.log(response)
         expect(response.status).to.be.equal(422)
         expect(response.body.message).to.be.deep.equal('It is not possible to create a match with two equal teams')
       })
@@ -77,7 +75,6 @@ describe('Testa /matches', () => {
           "awayTeam": 998,
           "awayTeamGoals": 0,
         }).set({ "authorization": token.body.token })
-        console.log(response)
         expect(response.status).to.be.equal(404)
         expect(response.body.message).to.be.deep.equal('There is no team with such id!')
       })

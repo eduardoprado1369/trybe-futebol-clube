@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import TeamService from '../services/Team';
 
-// const fieldsMissingMessage = 'All fields must be filled';
 export default class TeamController {
   static async findAllTeams(_req: Request, res: Response) {
     const allTeams = await TeamService.findAllTeams();

@@ -5,7 +5,6 @@ import TeamService from '../services/Team';
 
 export default class MatchController {
   static async findAllMatches(req: Request, res: Response) {
-    // console.log(req.route);
     if (req.query.inProgress) {
       const isInProgress = req.query.inProgress;
       if (isInProgress === 'true') {

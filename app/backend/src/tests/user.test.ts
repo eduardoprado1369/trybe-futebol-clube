@@ -57,7 +57,6 @@ describe('Testa /login', () => {
         const token = await chai.request(app).post('/login').send({email: 'user@user.com',
            password: 'secret_user'})
         const response = await chai.request(app).get('/login/validate').set({ "authorization": token.body.token })
-             console.log(response.status)
         expect(response.status).to.be.equal(200)
         expect(response.body.role).to.be.equal('user')
         });
@@ -78,21 +77,18 @@ describe('Testa /login', () => {
     it('Testa com email inexistente', async () => {
       const response = await chai.request(app).post('/login').send({email: 'incorrect@email.com',
          password: 'secret_user'})
-         // console.log(response)
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
     it('Testa com email em formato incorreto', async () => {
       const response = await chai.request(app).post('/login').send({email: 'not_email',
          password: 'secret_user'})
-         // console.log(response)
     expect(response.status).to.be.equal(400)
     expect(response.body.message).to.be.equal('All fields must be filled')
     })
     it('Testa com senha incorreta', async () => {
       const response = await chai.request(app).post('/login').send({email: 'user@user.com',
          password: 'incorrect_password'})
-         // console.log(response)
     expect(response.status).to.be.equal(401)
     expect(response.body.message).to.be.equal('Incorrect email or password')
     })
@@ -104,8 +100,6 @@ describe('Testa /login', () => {
          expect(response.body.message).to.be.equal('Token not found')
     })
     it('Testa o login/validate com token errado', async() => {
-      // await chai.request(app).post('/login').send({email: 'not_email',
-      //  password: 'incorrect_password'})
        const response = await chai.request(app).get('/login/validate').set({ "authorization": 'not_token' })
        expect(response.status).to.be.equal(401)
        expect(response.body.message).to.be.equal('Expired or invalid token')

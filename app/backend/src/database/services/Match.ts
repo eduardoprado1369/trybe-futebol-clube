@@ -26,7 +26,6 @@ export default class MatchService {
     const matches = await Matches.findAll({ where: { inProgress: true },
       include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
         { model: Teams, as: 'teamAway', attributes: ['teamName'] }] });
-    console.log(matches);
     return matches;
   }
 
@@ -44,14 +43,12 @@ export default class MatchService {
 
   static async finishMatch(id: number) {
     const match = await Matches.update({ inProgress: false }, { where: { id } });
-    console.log(match);
     return match;
   }
 
   static async updateMatch(id:number, goals: IUpdateMatch) {
     const { homeTeamGoals, awayTeamGoals } = goals;
     const match = await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
-    console.log(match);
     return match;
   }
 
@@ -71,9 +68,7 @@ export default class MatchService {
         .id, type) / (await calculateTotalMatches(i.id, type) * 3)) * 100)
         .toFixed(2)),
     })));
-    // console.log(leaderboard);
     const finalLeaderboard = orderLeaderboard(leaderboard);
     return finalLeaderboard;
   }
 }
-//  const allTeamNames = await Teams.findAll({ attributes: ['teamName'] });
