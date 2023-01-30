@@ -1,5 +1,5 @@
 interface ILogin {
-  email: number;
+  email: string;
   password: string;
 }
 

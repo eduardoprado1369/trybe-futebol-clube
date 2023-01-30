@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 import teams from './mocks/teams'
 
-describe.only('Testa /teams', () => {
+describe('Testa /teams', () => {
     it('Testa o findAll', async () => {
       const response = await chai.request(app).get('/teams')
   
