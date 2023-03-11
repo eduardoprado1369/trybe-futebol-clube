@@ -13,3 +13,4 @@ This application was fully tested using `integration tests`.
 * Chai
 * Mocha
 * Sinon
+* Docker
