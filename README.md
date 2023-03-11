@@ -1,13 +1,4 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Project Trybe Footbal Club
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
-
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+This is a back-end project that uses `Object-oriented programming` (`OOP`) to create a CRUD API that contains data about brazilian football (soccer), in which it's possible to create an account, login with an existing account, validate the login with a token, filter the teams and matches, calculate the leaderboards based on the results of the matches, among other funcionalities.
+This application was fully tested using `integration tests`.
