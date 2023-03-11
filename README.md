@@ -14,3 +14,14 @@ This application was fully tested using `integration tests`.
 * Mocha
 * Sinon
 * Docker
+
+# Tables
+* Users
+
+ |  field  |  type  | primary key |
+ |---------|--------|-------------|
+ | id      | number | true        |
+ | username| string | false
+ | role    | string | false
+ | email   | string | false
+ | password| string | false
