@@ -16,6 +16,7 @@ This application was fully tested using `integration tests`.
 * Docker
 
 # Tables
+Legends:  
 <span>*</span> -> primary key  
 ** -> foreign key
 * Users
