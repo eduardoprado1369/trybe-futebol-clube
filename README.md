@@ -16,12 +16,32 @@ This application was fully tested using `integration tests`.
 * Docker
 
 # Tables
+<span>*</span> -> primary key  
+** -> foreign key
 * Users
 
- |  field  |  type  | primary key |
- |---------|--------|-------------|
- | id      | number | true        |
- | username| string | false
- | role    | string | false
- | email   | string | false
- | password| string | false
+ |  field  |  type  |
+ |---------|--------|
+ | id*     | number |
+ | username| string |
+ | role    | string |
+ | email   | string |
+ | password| string |
+ 
+ * Teams
+ 
+ |  field  |  type  |
+ |---------|--------|
+ | id*     | number |
+ | teamName| string |
+ 
+ * Matches
+ 
+ |    field     |  type  |
+ |--------------|--------|
+ | id*          | number |
+ | homeTeam**   | number |
+ | homeTeamGoals| number |
+ | awayTeam**   | number |
+ | awayTeamGoals| number |
+ | inProgress   | boolean|
