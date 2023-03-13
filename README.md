@@ -46,3 +46,11 @@ Legends:
  | awayTeam**   | number |
  | awayTeamGoals| number |
  | inProgress   | boolean|
+ 
+ # How to run the project
+ 
+* With Docker:
+  1. Clone the repository:  
+     `git clone git@github.com:eduardoprado1369/trybe-futebol-clube.git`  
+  2. Start the containers that run the front-end, back-end and the database:  
+     `npm run compose:up` <br> * **The default ports are `3000`, `3001` and `3002` but can be changed in the docker-compose.yml file**  
