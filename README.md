@@ -48,9 +48,9 @@ Legends:
  | inProgress   | boolean|
  
  # How to run the project
- 
-* With Docker:
-  1. Clone the repository:  
-     `git clone git@github.com:eduardoprado1369/trybe-futebol-clube.git`  
-  2. Start the containers that run the front-end, back-end and the database:  
-     `npm run compose:up` <br> * **The default ports are `3000`, `3001` and `3002` but can be changed in the docker-compose.yml file**  
+
+<span>*</span> It's necessary to have Docker and Docker Compose installed in your computer before running it. 
+1. Clone the repository:  
+   `git clone git@github.com:eduardoprado1369/trybe-futebol-clube.git`  
+2. Start the containers that run the front-end, back-end and the database:  
+   `npm run compose:up` <br> * **The default ports are `3000`, `3001` and `3002` but can be changed in the docker-compose.yml file.**  
