@@ -1,6 +1,6 @@
 # Project Trybe Footbal Club
 
-This is a back-end project which uses `Object-oriented programming` (`OOP`) to create a CRUD API that contains data about brazilian football (soccer), in which it's possible to create an account, login with an existing account, validate the login with a token, filter the teams and matches, calculate the leaderboards based on the results of the matches, among other funcionalities.  
+This is a back-end project which uses `Object-oriented programming` (`OOP`) to create a CRUD API that contains data about brazilian football (soccer), in which it's possible to login with an existing account, validate the login with a token, filter the teams and matches, calculate the leaderboards based on the results of the matches, among other funcionalities.  
 This application was fully tested using `integration tests`.
 
 # Technologies used
@@ -23,6 +23,13 @@ This application was fully tested using `integration tests`.
 2. Start the containers that run the front-end, back-end and the database:  
    `npm run compose:up` <br> * **The default ports are `3000`, `3001` and `3002` but can be changed in the docker-compose.yml file.**  
 
+# Routes
+
+## User
+* POST
+  * `/login` -> logins with an existing account
+* GET
+  * `/login/validate` -> validates the token on the header and returns the role of the user
 
 # Tables
 Legends:  
