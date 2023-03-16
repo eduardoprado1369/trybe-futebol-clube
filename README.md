@@ -1,6 +1,6 @@
 # Project Trybe Footbal Club
 
-This is a back-end project which uses `Object-oriented programming` (`OOP`) to create a CRUD API that contains data about brazilian football (soccer), in which it's possible to login with an existing account, validate the login with a token, filter the teams and matches, calculate the leaderboards based on the results of the matches, among other funcionalities.  
+This is a back-end project which uses `Object-oriented programming` (`OOP`) to create a CRUD API that contains data about brazilian football (soccer), in which it's possible to login with an existing account, validate the login with a token, filter the teams and matches, calculate the leaderboard based on the results of the matches, among other funcionalities.  
 This application was fully tested using `integration tests`.
 
 # Technologies used
@@ -30,6 +30,26 @@ This application was fully tested using `integration tests`.
   * `/login` -> logins with an existing account
 * GET
   * `/login/validate` -> validates the token on the header and returns the role of the user
+
+## Teams
+* GET
+  * `/teams` -> lists all teams
+  * `/teams/:id` -> lists a specific team
+
+## Matches
+* GET
+  * `/matches` -> lists all matches
+* POST
+  * `/matches` -> creates a new match
+* PATCH
+  * `/matches/:id` -> updates a match
+  * `/matches/:id/finish` -> finishes a match in progress
+
+## Leaderboard
+* GET
+  * `/leaderboard` -> shows the complete leaderboard of the championship
+  * `/leaderboard/home` -> shows the leaderboard of the home teams
+  * `/leaderboard/home` -> shows the leaderboard of the visiting teams
 
 # Tables
 Legends:  
